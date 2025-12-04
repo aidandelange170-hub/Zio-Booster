@@ -1,62 +1,78 @@
-# NIO Emulator
+# Zio-Booster FPS Booster
 
-## High Performance Android Emulator
+Zio-Booster is a modern FPS boosting application that enhances your gaming experience by optimizing system resources and reducing temperatures in the background.
 
-NIO is a cutting-edge Android emulator that delivers exceptional performance with zero lag. Built with C++ for maximum efficiency, our emulator ensures the smoothest possible experience for all your Android gaming and application needs.
+## 🚀 Features
 
-## Key Features
-
-- **Zero Lag Guarantee**: C++ technology eliminates all lag for the best experience
-- **Free Forever**: No cost to use - ever
-- **Fast Installation**: Quick setup process
-- **Fast Loading**: Optimized for speed
-- **Smooth Experience**: Advanced performance management
-- **PC Fan Activation**: Built-in cooling system activation for high-performance sessions
-- **Multiple File Architecture**: Modular design for optimal performance
-
-## How It Works
-
-The NIO Emulator uses advanced C++ programming to handle all performance issues, ensuring that users never experience lag in any game. Our multi-file architecture allows for efficient resource management and optimal performance.
-
-## Development Team
-
-Currently developed by a dedicated team focused on delivering the best possible emulation experience.
-
-## Usage
-
-To activate the PC fan during emulation, press 'f' while the emulator is running. This will engage your system's cooling for optimal high-performance operation.
-
-Press 'q' to quit the emulator at any time.
-
-## Files Structure
-
-- `nio_emulator.cpp` - Main application entry point
-- `emulator_core.h` - Core emulation functionality
-- `performance_manager.h` - Performance optimization systems
-- `fan_controller.h` - PC fan activation controls
+- **Temperature Monitoring**: Continuously monitors system temperature and identifies high-temperature processes
+- **Automatic Optimization**: Automatically terminates high-temperature applications to boost FPS
+- **Modern UI**: Clean, intuitive interface with real-time system information
+- **Safe Process Management**: Protects critical system processes while optimizing performance
+- **Real-time Monitoring**: Shows CPU, memory, and temperature statistics
+- **Manual Optimization**: One-click manual optimization when needed
 
 ## 📋 Requirements
 
-- C++ compiler (GCC, Clang, or MSVC)
-- Standard C++ libraries
+- Python 3.7 or higher
 - Windows, macOS, or Linux operating system
 
 ## 🛠️ Installation
 
-1. Compile the emulator:
+1. Clone the repository:
 ```bash
-g++ -std=c++11 -o nio_emulator nio_emulator.cpp
+git clone https://github.com/yourusername/Zio-Booster.git
 ```
 
-2. Run the emulator:
+2. Navigate to the project directory:
 ```bash
-./nio_emulator
+cd Zio-Booster
+```
+
+3. Run the start application script:
+```bash
+python start-application.py
 ```
 
 ## 🎮 Usage
 
-1. Run the compiled application
-2. The emulator will initialize with high-performance settings
-3. Press 'f' to activate PC fan for cooling during intensive sessions
-4. Press 'q' to quit the emulator
-5. Enjoy lag-free Android emulation experience
+1. Run the application using `python start-application.py`
+2. The application will automatically install required dependencies
+3. Click "Start Boosting" to begin automatic optimization
+4. Monitor system resources and process temperatures in real-time
+5. Use "Manual Optimize" for on-demand optimization
+6. Click "Stop Boosting" to pause automatic optimization
+
+## 🔧 Customization
+
+The application includes various optimization settings that can be adjusted in the `config.json` file (if available):
+- Optimization interval
+- Temperature thresholds
+- Protected processes list
+
+## 📊 System Information
+
+The UI displays real-time information including:
+- CPU usage percentage
+- Memory usage percentage
+- System temperature (where supported)
+- List of processes with temperature scores
+- Current optimization status
+
+## ⚠️ Safety Features
+
+- Protected critical system processes from termination
+- Safeguards against terminating important applications
+- Temperature-based scoring to identify problematic processes
+- Confirmation prompts for manual actions
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🐛 Issues
+
+If you encounter any issues, please report them in the Issues section of the repository.
