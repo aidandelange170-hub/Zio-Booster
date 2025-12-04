@@ -5,13 +5,16 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
-
-# Dependencies
 venv/
 .venv/
 .env
 .env.local
 *.env.*
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage/
+htmlcov/
 
 # Build artifacts
 dist/
@@ -28,14 +31,7 @@ build/
 *.swo
 *.tmp
 
-# Coverage
-.coverage
-htmlcov/
-coverage/
-
-# MyPy
-.mypy_cache/
-
-# PyTest
-.pytest_cache/
+# OS
+.DS_Store
+Thumbs.db
 ```
