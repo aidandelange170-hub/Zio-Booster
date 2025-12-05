@@ -13,6 +13,7 @@ Zio-Booster is a modern FPS boosting application that enhances your gaming exper
 - **Manual Optimization**: One-click manual optimization when needed
 
 ### New Enhanced Features
+- **Fast C++ Backend**: Enhanced performance with C++ implementation for critical system operations, providing faster and smoother optimization
 - **Game Profile Management**: Create and manage profiles for different games with custom optimization settings
 - **Gaming Mode**: Activate focused gaming mode that blocks notifications and disables power-saving features
 - **Advanced Performance Metrics**: Detailed FPS tracking, network latency monitoring, and historical performance statistics
