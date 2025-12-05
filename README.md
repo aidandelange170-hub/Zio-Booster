@@ -4,12 +4,20 @@ Zio-Booster is a modern FPS boosting application that enhances your gaming exper
 
 ## 🚀 Features
 
+### Core Features
 - **Temperature Monitoring**: Continuously monitors system temperature and identifies high-temperature processes
 - **Automatic Optimization**: Automatically terminates high-temperature applications to boost FPS
 - **Modern UI**: Clean, intuitive interface with real-time system information
 - **Safe Process Management**: Protects critical system processes while optimizing performance
 - **Real-time Monitoring**: Shows CPU, memory, and temperature statistics
 - **Manual Optimization**: One-click manual optimization when needed
+
+### New Enhanced Features
+- **Game Profile Management**: Create and manage profiles for different games with custom optimization settings
+- **Gaming Mode**: Activate focused gaming mode that blocks notifications and disables power-saving features
+- **Advanced Performance Metrics**: Detailed FPS tracking, network latency monitoring, and historical performance statistics
+- **System Health Dashboard**: Comprehensive system health overview with performance trend analysis
+- **Network Optimization**: Real-time bandwidth prioritization for games and latency reduction techniques
 
 ## 📋 Requirements
 
@@ -37,17 +45,31 @@ python start-application.py
 
 1. Run the application using `python start-application.py`
 2. The application will automatically install required dependencies
-3. Click "Start Boosting" to begin automatic optimization
-4. Monitor system resources and process temperatures in real-time
-5. Use "Manual Optimize" for on-demand optimization
-6. Click "Stop Boosting" to pause automatic optimization
+3. Select a game profile from the dropdown menu (optional)
+4. Click "Apply Profile" to use custom optimization settings
+5. Click "Enable Gaming Mode" to activate focused gaming mode
+6. Click "Start Boosting" to begin automatic optimization
+7. Monitor system resources and process temperatures in real-time
+8. Use "Manual Optimize" for on-demand optimization
+9. Click "Stop Boosting" to pause automatic optimization
 
-## 🔧 Customization
+## 🔧 New Feature Details
 
-The application includes various optimization settings that can be adjusted in the `config.json` file (if available):
-- Optimization interval
-- Temperature thresholds
-- Protected processes list
+### Game Profile Management
+- Create custom profiles for different games with specific optimization settings
+- Each profile can have different temperature thresholds and optimization behaviors
+- Profiles are saved between sessions
+
+### Gaming Mode
+- Blocks system notifications during gameplay
+- Disables power-saving features temporarily
+- Sets high-performance power plan
+- Optimizes background services
+
+### Performance Metrics
+- Tracks CPU, memory, and temperature trends
+- Provides optimization impact analysis
+- Historical performance statistics
 
 ## 📊 System Information
 
@@ -57,6 +79,8 @@ The UI displays real-time information including:
 - System temperature (where supported)
 - List of processes with temperature scores
 - Current optimization status
+- Number of optimizations performed
+- Gaming mode status
 
 ## ⚠️ Safety Features
 

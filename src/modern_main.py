@@ -21,16 +21,19 @@ except ImportError:
 
 from utils.temperature_monitor import TemperatureMonitor
 from utils.optimizer import SystemOptimizer
+from utils.performance_metrics import PerformanceMetrics
 
 class ZioBoosterApp:
     def __init__(self):
         # Initialize temperature monitor and optimizer
         self.temp_monitor = TemperatureMonitor()
         self.optimizer = SystemOptimizer()
+        self.performance_metrics = PerformanceMetrics()
         
         # FPS optimization variables
         self.is_running = False
         self.monitoring_thread = None
+        self.gaming_mode_active = False
         
         if CUSTOM_TK_AVAILABLE:
             # Use modern UI
@@ -41,6 +44,8 @@ class ZioBoosterApp:
             self.ui.start_boosting_callback = self.start_boosting
             self.ui.stop_boosting_callback = self.stop_boosting
             self.ui.manual_optimize_callback = self.manual_optimize
+            self.ui.gaming_mode_callback = self.toggle_gaming_mode
+            self.ui.apply_profile_callback = self.apply_profile
         else:
             # Fallback to basic tkinter UI
             self.root = tk.Tk()
@@ -232,6 +237,53 @@ class ZioBoosterApp:
         
         # Schedule next update
         self.root.after(2000, self.update_system_info)
+    
+    def toggle_gaming_mode(self):
+        """Toggle gaming mode on/off"""
+        if self.gaming_mode_active:
+            # Disable gaming mode
+            self.optimizer.disable_gaming_mode()
+            self.gaming_mode_active = False
+            if CUSTOM_TK_AVAILABLE:
+                self.ui.gaming_mode_label.configure(text="Gaming Mode: Off")
+                self.ui.gaming_mode_button.configure(text="Enable Gaming Mode", fg_color="#FF9800")
+            else:
+                # For basic UI, we would need to implement this
+                pass
+            print("Gaming mode disabled")
+        else:
+            # Enable gaming mode
+            self.optimizer.enable_gaming_mode()
+            self.gaming_mode_active = True
+            if CUSTOM_TK_AVAILABLE:
+                self.ui.gaming_mode_label.configure(text="Gaming Mode: Active")
+                self.ui.gaming_mode_button.configure(text="Disable Gaming Mode", fg_color="#795548")
+            else:
+                # For basic UI, we would need to implement this
+                pass
+            print("Gaming mode enabled")
+    
+    def apply_profile(self):
+        """Apply selected game profile"""
+        if CUSTOM_TK_AVAILABLE:
+            profile_name = self.ui.profile_var.get()
+            if profile_name and profile_name != "Default":
+                success = self.optimizer.apply_profile(profile_name)
+                if success:
+                    print(f"Applied profile: {profile_name}")
+                    # Update status to indicate profile is active
+                    if self.is_running:
+                        if CUSTOM_TK_AVAILABLE:
+                            self.ui.status_label.configure(text=f"Status: Active - Profile: {profile_name}")
+                    else:
+                        if CUSTOM_TK_AVAILABLE:
+                            self.ui.status_label.configure(text=f"Status: Profile Applied - {profile_name}")
+                else:
+                    print(f"Failed to apply profile: {profile_name}")
+            else:
+                print("No profile selected")
+        else:
+            print("Profile selection not available in basic UI")
 
     def update_process_list(self):
         """Update the list of processes, highlighting high-temperature ones"""

@@ -7,6 +7,9 @@ import platform
 import time
 from typing import List, Dict
 from .temperature_monitor import TemperatureMonitor
+from .profile_manager import ProfileManager, GameProfile
+from .performance_metrics import PerformanceMetrics
+from .gaming_mode import GamingMode
 
 class SystemOptimizer:
     """Class to optimize system performance for better FPS"""
@@ -14,6 +17,36 @@ class SystemOptimizer:
     def __init__(self):
         self.temp_monitor = TemperatureMonitor()
         self.original_process_priorities = {}
+        self.profile_manager = ProfileManager()
+        self.performance_metrics = PerformanceMetrics()
+        self.gaming_mode = GamingMode()
+        self.active_profile = None
+        self.optimization_count = 0
+        
+    def apply_profile(self, profile_name: str) -> bool:
+        """Apply settings from a game profile"""
+        profile = self.profile_manager.get_profile(profile_name)
+        if profile:
+            self.active_profile = profile
+            # Apply profile-specific settings
+            print(f"Applied profile: {profile_name}")
+            return True
+        return False
+    
+    def enable_gaming_mode(self) -> bool:
+        """Enable focused gaming mode"""
+        return self.gaming_mode.activate_gaming_mode()
+    
+    def disable_gaming_mode(self) -> bool:
+        """Disable focused gaming mode"""
+        return self.gaming_mode.deactivate_gaming_mode()
+    
+    def capture_performance_snapshot(self):
+        """Capture a performance snapshot"""
+        snapshot = self.performance_metrics.capture_snapshot()
+        # Update the active optimizations count in the snapshot
+        snapshot.active_optimizations = self.optimization_count
+        return snapshot
     
     def boost_cpu_performance(self):
         """Optimize CPU scheduling for better performance"""
@@ -134,21 +167,38 @@ class SystemOptimizer:
         """Run a complete optimization cycle"""
         print("Running optimization cycle...")
         
+        # Capture performance before optimization
+        self.capture_performance_snapshot()
+        
+        # Use profile-specific threshold if available
+        threshold = self.active_profile.temp_threshold if self.active_profile else temp_threshold
+        
         # Clean memory
         memory_cleaned = self.clean_memory()
         print(f"Cleaned memory by terminating {len(memory_cleaned)} processes")
         
         # Terminate high-temperature processes
-        terminated = self.terminate_high_temperature_processes(threshold=temp_threshold)
+        terminated = self.terminate_high_temperature_processes(threshold=threshold)
         print(f"Terminated {len(terminated)} high-temperature processes")
         
-        # Apply other optimizations
-        self.boost_cpu_performance()
-        self.optimize_network_for_games()
+        # Apply other optimizations based on profile settings
+        if not self.active_profile or self.active_profile.optimize_network:
+            self.optimize_network_for_games()
+        
+        if not self.active_profile or self.active_profile.high_priority:
+            # Set high priority for gaming processes (if known)
+            pass
+        
+        # Update optimization count
+        self.optimization_count += 1
+        
+        # Capture performance after optimization
+        self.capture_performance_snapshot()
         
         print("Optimization cycle completed")
         return {
             'memory_cleaned_count': len(memory_cleaned),
             'terminated_processes': terminated,
-            'cycle_complete': True
+            'cycle_complete': True,
+            'optimization_count': self.optimization_count
         }
