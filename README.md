@@ -29,7 +29,7 @@ Zio-Booster is a modern FPS boosting application that enhances your gaming exper
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/Zio-Booster.git
+git clone https://github.com/aidandelange170-hub/Zio-Booster.git
 ```
 
 2. Navigate to the project directory:
