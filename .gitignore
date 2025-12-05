@@ -1,48 +1,28 @@
 ```
-# Executable and build artifacts
-exe/
-*.spec
+# Build artifacts
+build/
+# Python compiled files
+*.pyc
+__pycache__/
+# Executables and packages
+*.pkg
+*.toc
+*.pyz
 *.exe
 *.dll
 *.so
+*.a
+*.obj
 *.out
-
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.venv/
-.venv*/
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Logs and temp files
+# Logs and temporary files
 *.log
 *.tmp
 *.swp
-*.swo
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Environment variables
+# Environment files
 .env
 .env.local
 *.env.*
-
-# Editors
+# Editor files
 .vscode/
 .idea/
-*.swp
-*.swo
 ```
