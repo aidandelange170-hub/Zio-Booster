@@ -10,6 +10,7 @@ from .temperature_monitor import TemperatureMonitor
 from .profile_manager import ProfileManager, GameProfile
 from .performance_metrics import PerformanceMetrics
 from .gaming_mode import GamingMode
+from .fast_optimizer import get_fast_optimizer
 
 class SystemOptimizer:
     """Class to optimize system performance for better FPS"""
@@ -22,6 +23,7 @@ class SystemOptimizer:
         self.gaming_mode = GamingMode()
         self.active_profile = None
         self.optimization_count = 0
+        self.fast_optimizer = get_fast_optimizer()
         
     def apply_profile(self, profile_name: str) -> bool:
         """Apply settings from a game profile"""
@@ -40,6 +42,10 @@ class SystemOptimizer:
     def disable_gaming_mode(self) -> bool:
         """Disable focused gaming mode"""
         return self.gaming_mode.deactivate_gaming_mode()
+    
+    def get_fast_system_info(self) -> Dict[str, float]:
+        """Get system information using fast C++ implementation"""
+        return self.fast_optimizer.get_system_info_fast()
     
     def capture_performance_snapshot(self):
         """Capture a performance snapshot"""
@@ -172,6 +178,9 @@ class SystemOptimizer:
         
         # Use profile-specific threshold if available
         threshold = self.active_profile.temp_threshold if self.active_profile else temp_threshold
+        
+        # Use fast C++ optimization for immediate performance boost
+        self.fast_optimizer.optimize_system_fast()
         
         # Clean memory
         memory_cleaned = self.clean_memory()

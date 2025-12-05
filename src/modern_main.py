@@ -210,30 +210,60 @@ class ZioBoosterApp:
 
     def update_system_info(self):
         """Update system information labels"""
-        import psutil
-        
-        cpu_percent = psutil.cpu_percent(interval=1)
-        memory_percent = psutil.virtual_memory().percent
+        # Use fast C++ implementation for system info when available
+        try:
+            system_info = self.optimizer.get_fast_system_info()
+            cpu_percent = system_info['cpu_usage']
+            available_memory = system_info['available_memory']
+            total_memory = system_info['total_memory']
+            memory_percent = ((total_memory - available_memory) / total_memory) * 100 if total_memory > 0 else 0
+            cpu_temp = system_info['cpu_temp']
+        except:
+            # Fallback to psutil if C++ implementation fails
+            import psutil
+            cpu_percent = psutil.cpu_percent(interval=1)
+            memory_percent = psutil.virtual_memory().percent
+            cpu_temp = self.temp_monitor.get_cpu_temperature()
         
         if CUSTOM_TK_AVAILABLE:
-            self.ui.cpu_label.configure(text=f"CPU Usage: {cpu_percent}%")
-            self.ui.memory_label.configure(text=f"Memory Usage: {memory_percent}%")
+            self.ui.cpu_label.configure(text=f"CPU Usage: {cpu_percent:.1f}%")
+            self.ui.memory_label.configure(text=f"Memory Usage: {memory_percent:.1f}%")
+            
+            # Update additional labels that may exist in the modern UI
+            try:
+                # Update optimization count
+                self.ui.optimization_count_label.configure(text=f"Optimizations: {self.optimizer.optimization_count}")
+                
+                # Update gaming mode status
+                if self.gaming_mode_active:
+                    self.ui.gaming_mode_label.configure(text="Gaming Mode: Active")
+                else:
+                    self.ui.gaming_mode_label.configure(text="Gaming Mode: Inactive")
+            except AttributeError:
+                pass  # Some UI elements may not exist
         else:
-            self.cpu_label.config(text=f"{cpu_percent}%")
-            self.memory_label.config(text=f"{memory_percent}%")
+            self.cpu_label.config(text=f"{cpu_percent:.1f}%")
+            self.memory_label.config(text=f"{memory_percent:.1f}%")
         
         # Update temperature
-        cpu_temp = self.temp_monitor.get_cpu_temperature()
-        if cpu_temp is not None:
+        if cpu_temp is not None and cpu_temp > 0:  # C++ implementation returns 0 if not available
             if CUSTOM_TK_AVAILABLE:
                 self.ui.temp_label.configure(text=f"CPU Temp: {cpu_temp:.1f}°C")
             else:
                 self.temp_label.config(text=f"{cpu_temp:.1f}°C")
         else:
-            if CUSTOM_TK_AVAILABLE:
-                self.ui.temp_label.configure(text="CPU Temp: N/A")
+            # Fallback to temperature monitor if C++ doesn't provide temperature
+            temp_fallback = self.temp_monitor.get_cpu_temperature()
+            if temp_fallback is not None:
+                if CUSTOM_TK_AVAILABLE:
+                    self.ui.temp_label.configure(text=f"CPU Temp: {temp_fallback:.1f}°C")
+                else:
+                    self.temp_label.config(text=f"{temp_fallback:.1f}°C")
             else:
-                self.temp_label.config(text="N/A")
+                if CUSTOM_TK_AVAILABLE:
+                    self.ui.temp_label.configure(text="CPU Temp: N/A")
+                else:
+                    self.temp_label.config(text="N/A")
         
         # Schedule next update
         self.root.after(2000, self.update_system_info)
