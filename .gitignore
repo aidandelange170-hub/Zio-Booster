@@ -1,36 +1,57 @@
 ```
 # Compiled and build artifacts
-*.so
 *.pyc
 __pycache__/
 *.o
 *.obj
-build/
-dist/
 
 # Dependencies
 .venv/
 venv/
+node_modules/
+*.egg-info/
+dist/
+build/
 
 # Logs and temp files
 *.log
 *.tmp
+*.swp
+
+# Environment
+.env
+.env.local
+*.env.*
 
 # Editors
 .vscode/
 .idea/
 
-# Coverage
+# Test files
+.pytest_cache/
 .coverage
 coverage/
 htmlcov/
 
-# Python specific
-*.pyc
-__pycache__/
-*.pyo
-*.pyd
-.Python
-*.so
-.PyInstaller/
+# Distribution archives
+*.tar
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.zip
+*.gz
+*.bz2
+*.xz
+*.7z
+*.rar
+*.zst
+*.lz4
+*.lzh
+*.cab
+*.arj
+*.rpm
+*.deb
+*.Z
+*.lz
+*.lzo
 ```

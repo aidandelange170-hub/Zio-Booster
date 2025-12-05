@@ -11,6 +11,8 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from utils.temperature_monitor import TemperatureMonitor
 from utils.optimizer import SystemOptimizer
+from utils.update_manager import initialize_auto_updates, check_for_updates_now, get_current_version
+from utils.update_scheduler import configure_update_schedule
 
 class ZioBoosterApp:
     def __init__(self):
@@ -18,18 +20,32 @@ class ZioBoosterApp:
         self.temp_monitor = TemperatureMonitor()
         self.optimizer = SystemOptimizer()
         
+        # Initialize auto-update functionality
+        self.setup_auto_updates()
+        
         # FPS optimization variables
         self.is_running = False
         self.monitoring_thread = None
         
         # Initialize UI (using basic tkinter for now to avoid dependency issues)
         self.root = tk.Tk()
-        self.root.title("Zio-Booster FPS Booster")
+        self.root.title(f"Zio-Booster FPS Booster v{get_current_version()}")
         self.root.geometry("700x600")
         self.root.resizable(True, True)
         
         # Create UI
         self.create_ui()
+    
+    def setup_auto_updates(self):
+        """Setup auto-update functionality"""
+        try:
+            # Initialize the auto-update system
+            initialize_auto_updates()
+            # Configure update checks every 24 hours
+            configure_update_schedule(hours_interval=24)
+            print(f"Auto-update system initialized. Current version: {get_current_version()}")
+        except Exception as e:
+            print(f"Error initializing auto-update system: {e}")
     
     def create_ui(self):
         """Create the main UI"""
@@ -86,6 +102,13 @@ class ZioBoosterApp:
                                                font=("Arial", 12), width=15)
         self.manual_optimize_button.pack(side="left", padx=10)
         
+        # Manual update check button
+        self.update_button = tk.Button(control_frame, text="Check for Updates", 
+                                      command=self.check_for_updates, 
+                                      bg="#FF9800", fg="white", 
+                                      font=("Arial", 12), width=15)
+        self.update_button.pack(side="left", padx=10)
+        
         # Temperature and process info
         temp_frame = tk.Frame(self.root)
         temp_frame.pack(pady=10, fill="both", expand=True, padx=20)
@@ -141,6 +164,32 @@ class ZioBoosterApp:
         
         # Reset status after a few seconds
         self.root.after(3000, lambda: self.status_label.config(text="Status: Idle", fg="black") if not self.is_running else None)
+    
+    def check_for_updates(self):
+        """Manually check for updates"""
+        self.status_label.config(text="Status: Checking for Updates...", fg="blue")
+        # Disable the button during update check
+        self.update_button.config(state="disabled")
+        
+        # Run the update check in a separate thread to avoid blocking the UI
+        def update_check_thread():
+            try:
+                updated = check_for_updates_now()
+                if updated:
+                    self.status_label.config(text="Status: Update Installed! Restart Recommended", fg="green")
+                    # Update window title with new version
+                    self.root.title(f"Zio-Booster FPS Booster v{get_current_version()}")
+                else:
+                    self.status_label.config(text="Status: Already Up-to-Date", fg="green")
+            except Exception as e:
+                self.status_label.config(text=f"Status: Update Error - {str(e)}", fg="red")
+                print(f"Update check error: {e}")
+            finally:
+                # Re-enable the button after update check
+                self.root.after(0, lambda: self.update_button.config(state="normal"))
+        
+        update_thread = threading.Thread(target=update_check_thread, daemon=True)
+        update_thread.start()
     
     def monitor_system(self):
         """Monitor system and optimize in the background"""
