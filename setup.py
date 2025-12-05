@@ -12,7 +12,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 
 setup(
     name="zio-booster",
-    version="1.0.0",
+    version="2.0.0",
     author="Zio-Booster Development Team",
     author_email="zio-booster@example.com",
     description="A modern FPS booster application that optimizes your system in the background to increase frame rates and reduce temperature",
