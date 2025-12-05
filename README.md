@@ -19,6 +19,7 @@ Zio-Booster is a modern FPS boosting application that enhances your gaming exper
 - **Advanced Performance Metrics**: Detailed FPS tracking, network latency monitoring, and historical performance statistics
 - **System Health Dashboard**: Comprehensive system health overview with performance trend analysis
 - **Network Optimization**: Real-time bandwidth prioritization for games and latency reduction techniques
+- **Christmas Event**: Special holiday-themed features and optimizations during Christmas season (December 1 - January 5)
 
 ## 📋 Requirements
 
