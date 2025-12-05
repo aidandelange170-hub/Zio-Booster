@@ -33,6 +33,48 @@ Zio-Booster is a modern FPS booster application that optimizes your system in th
 - Safeguards critical system processes from termination
 - Manual optimization button for on-demand optimization
 
+### 6. New Enhanced Features
+
+#### 6.1 Game Profile Management
+- Create and manage profiles for different games
+- Save custom optimization settings per game
+- Auto-apply optimal settings when launching specific games
+
+#### 6.2 Advanced Performance Metrics
+- Detailed FPS tracking and visualization
+- Network latency monitoring
+- GPU temperature and utilization tracking
+- Historical performance statistics
+
+#### 6.3 Scheduling and Automation
+- Schedule optimization tasks at specific times
+- Automatic optimization during gaming sessions
+- Predefined optimization presets for different scenarios
+
+#### 6.4 Gaming Mode
+- Activate focused gaming mode
+- Block notifications and updates during gameplay
+- Disable power-saving features temporarily
+- Optimize background services during gaming
+
+#### 6.5 System Health Dashboard
+- Comprehensive system health overview
+- Performance trend analysis
+- Optimization effectiveness metrics
+- Alert system for critical issues
+
+#### 6.6 Network Optimization
+- Real-time bandwidth prioritization for games
+- Latency reduction techniques
+- Connection quality monitoring
+- DNS optimization for gaming servers
+
+#### 6.7 Security Features
+- Safe termination with process validation
+- Confirmation dialogs for critical actions
+- Backup and restore capabilities
+- Audit trail of all optimization actions
+
 ## How It Works
 
 ### Background Optimization

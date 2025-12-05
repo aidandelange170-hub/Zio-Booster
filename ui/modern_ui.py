@@ -21,7 +21,7 @@ class ModernZioBoosterUI:
         
         # Configure the main window
         self.root.title("Zio-Booster FPS Booster")
-        self.root.geometry("800x600")
+        self.root.geometry("900x700")
         self.root.resizable(True, True)
         
         # Create main frame
@@ -61,9 +61,16 @@ class ModernZioBoosterUI:
         self.temp_label = ctk.CTkLabel(self.info_frame, text="CPU Temp: N/A", font=ctk.CTkFont(size=12))
         self.temp_label.grid(row=0, column=2, padx=10, pady=5, sticky="w")
         
+        # Additional metrics
+        self.optimization_count_label = ctk.CTkLabel(self.info_frame, text="Optimizations: 0", font=ctk.CTkFont(size=12))
+        self.optimization_count_label.grid(row=1, column=0, padx=10, pady=5, sticky="w")
+        
+        self.gaming_mode_label = ctk.CTkLabel(self.info_frame, text="Gaming Mode: Off", font=ctk.CTkFont(size=12))
+        self.gaming_mode_label.grid(row=1, column=1, padx=10, pady=5, sticky="w")
+        
         # Control buttons frame
         self.control_frame = ctk.CTkFrame(self.main_frame)
-        self.control_frame.pack(fill="x", padx=20, pady=20)
+        self.control_frame.pack(fill="x", padx=20, pady=10)
         
         # Start button
         self.start_button = ctk.CTkButton(
@@ -74,7 +81,7 @@ class ModernZioBoosterUI:
             hover_color="#388E3C",
             font=ctk.CTkFont(size=14, weight="bold")
         )
-        self.start_button.pack(side="left", padx=10, pady=10)
+        self.start_button.pack(side="left", padx=5, pady=10)
         
         # Stop button
         self.stop_button = ctk.CTkButton(
@@ -86,7 +93,7 @@ class ModernZioBoosterUI:
             font=ctk.CTkFont(size=14, weight="bold"),
             state="disabled"
         )
-        self.stop_button.pack(side="left", padx=10, pady=10)
+        self.stop_button.pack(side="left", padx=5, pady=10)
         
         # Manual optimize button
         self.manual_optimize_button = ctk.CTkButton(
@@ -97,7 +104,45 @@ class ModernZioBoosterUI:
             hover_color="#1976D2",
             font=ctk.CTkFont(size=14, weight="bold")
         )
-        self.manual_optimize_button.pack(side="left", padx=10, pady=10)
+        self.manual_optimize_button.pack(side="left", padx=5, pady=10)
+        
+        # Gaming Mode button
+        self.gaming_mode_button = ctk.CTkButton(
+            self.control_frame,
+            text="Enable Gaming Mode",
+            command=self.gaming_mode_callback,
+            fg_color="#FF9800",
+            hover_color="#F57C00",
+            font=ctk.CTkFont(size=14, weight="bold")
+        )
+        self.gaming_mode_button.pack(side="left", padx=5, pady=10)
+        
+        # Profile selection frame
+        self.profile_frame = ctk.CTkFrame(self.main_frame)
+        self.profile_frame.pack(fill="x", padx=20, pady=10)
+        
+        # Profile selection
+        profile_label = ctk.CTkLabel(self.profile_frame, text="Game Profile:", font=ctk.CTkFont(size=12, weight="bold"))
+        profile_label.pack(side="left", padx=10, pady=10)
+        
+        self.profile_var = ctk.StringVar(value="Default")
+        self.profile_dropdown = ctk.CTkComboBox(
+            self.profile_frame,
+            values=["Default", "Cyberpunk 2077", "Fortnite", "CS:GO", "Valorant"],
+            variable=self.profile_var,
+            width=150
+        )
+        self.profile_dropdown.pack(side="left", padx=10, pady=10)
+        
+        self.apply_profile_button = ctk.CTkButton(
+            self.profile_frame,
+            text="Apply Profile",
+            command=self.apply_profile_callback,
+            fg_color="#9C27B0",
+            hover_color="#7B1FA2",
+            font=ctk.CTkFont(size=12)
+        )
+        self.apply_profile_button.pack(side="left", padx=10, pady=10)
         
         # Process list frame
         self.process_frame = ctk.CTkFrame(self.main_frame)
@@ -140,4 +185,12 @@ class ModernZioBoosterUI:
     
     def manual_optimize_callback(self):
         """Callback for manual optimize button"""
+        pass  # This will be implemented by the main app
+    
+    def gaming_mode_callback(self):
+        """Callback for gaming mode button"""
+        pass  # This will be implemented by the main app
+    
+    def apply_profile_callback(self):
+        """Callback for apply profile button"""
         pass  # This will be implemented by the main app
