@@ -152,6 +152,51 @@ The Zio-Booster application now includes a special Christmas event that activate
 - Better accuracy in process identification
 - Enhanced process temperature scoring
 
+## 🤖 AI-Powered Optimization Feature
+
+### Overview
+The Zio-Booster FPS Booster now includes an advanced AI-powered optimization feature that uses machine learning to intelligently optimize system performance. This feature leverages machine learning algorithms to detect anomalous system behavior and apply targeted optimizations based on learned patterns from system usage data.
+
+### AI Optimization Features
+
+#### 1. Machine Learning-Based Anomaly Detection
+- Uses Isolation Forest algorithm to detect unusual system behavior
+- Learns from system patterns over time to improve optimization decisions
+- Adapts to individual system usage patterns
+- Proactive optimization before performance issues occur
+
+#### 2. Intelligent Optimization Recommendations
+- Analyzes CPU usage patterns and recommends process priority adjustments
+- Monitors memory usage and suggests cache clearing
+- Tracks disk usage and identifies temporary files for cleanup
+- Identifies unnecessary processes that may impact gaming performance
+
+#### 3. Automated System Optimization
+- Automatically applies optimizations when anomalies are detected
+- Reduces priority of CPU-intensive background processes
+- Clears system memory caches to free up resources
+- Cleans temporary files to optimize disk space
+- Terminates unnecessary processes during gaming sessions
+
+#### 4. Continuous Learning
+- Collects system metrics continuously to improve model accuracy
+- Retrains the ML model periodically with new data
+- Maintains performance history for analysis
+- Adapts to changing system usage patterns
+
+### Technical Implementation
+- **Isolation Forest**: Used for anomaly detection to identify when system optimization is needed
+- **Feature Scaling**: StandardScaler normalizes input features for consistent ML model performance
+- **Data Persistence**: Models and training data are saved to disk for continuity across sessions
+- **System Metrics**: Collects CPU, memory, disk, network, and process metrics for ML analysis
+
+### Integration with Existing System
+The AI optimizer is integrated seamlessly with the existing optimization pipeline:
+1. Runs as part of the regular optimization cycle
+2. Works alongside existing C++ performance optimizations
+3. Complements the temperature-based optimization system
+4. Integrates with gaming mode and profile management
+
 ## 🐛 Bug Fixes Summary
 
 ### Fixed Issues
