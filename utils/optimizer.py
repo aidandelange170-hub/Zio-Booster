@@ -11,6 +11,7 @@ from .profile_manager import ProfileManager, GameProfile
 from .performance_metrics import PerformanceMetrics
 from .gaming_mode import GamingMode
 from .fast_optimizer import get_fast_optimizer
+from .ai_optimizer import AIOptimizerManager
 
 class SystemOptimizer:
     """Class to optimize system performance for better FPS"""
@@ -24,6 +25,23 @@ class SystemOptimizer:
         self.active_profile = None
         self.optimization_count = 0
         self.fast_optimizer = get_fast_optimizer()
+        self.ai_optimizer_manager = AIOptimizerManager()
+        
+    def start_ai_optimization(self):
+        """Start the AI optimization loop"""
+        self.ai_optimizer_manager.start_optimization_loop()
+        
+    def stop_ai_optimization(self):
+        """Stop the AI optimization loop"""
+        self.ai_optimizer_manager.stop_optimization_loop()
+        
+    def run_ai_optimization(self):
+        """Run a single AI optimization cycle"""
+        return self.ai_optimizer_manager.run_single_optimization()
+        
+    def get_ai_performance_metrics(self):
+        """Get performance metrics from the AI optimizer"""
+        return self.ai_optimizer_manager.get_performance_metrics()
         
     def apply_profile(self, profile_name: str) -> bool:
         """Apply settings from a game profile"""
@@ -182,6 +200,10 @@ class SystemOptimizer:
         # Use fast C++ optimization for immediate performance boost
         self.fast_optimizer.optimize_system_fast()
         
+        # Run AI optimization
+        ai_result = self.run_ai_optimization()
+        print(f"AI Optimization completed: {len(ai_result['applied_optimizations'])} AI-based optimizations applied")
+        
         # Clean memory
         memory_cleaned = self.clean_memory()
         print(f"Cleaned memory by terminating {len(memory_cleaned)} processes")
@@ -208,6 +230,8 @@ class SystemOptimizer:
         return {
             'memory_cleaned_count': len(memory_cleaned),
             'terminated_processes': terminated,
+            'ai_optimizations_count': len(ai_result['applied_optimizations']),
+            'ai_recommendations_count': len(ai_result['recommendations']),
             'cycle_complete': True,
             'optimization_count': self.optimization_count
         }
