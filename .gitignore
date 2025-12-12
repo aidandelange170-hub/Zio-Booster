@@ -1,70 +1,90 @@
-```
-# Compiled and build artifacts
-*.pyc
-__pycache__/
-*.o
-*.obj
-
-# Dependencies
-.venv/
-venv/
-node_modules/
-*.egg-info/
-dist/
-build/
+# Examples and executables
+*.bat
+*.ps1
+*.exe
+*.dll
 *.so
 *.dylib
-*.dll
 
-# Logs and temp files
+# Environment variables
+.env
+.env.local
+*.env.*
+
+# Logs
 *.log
+
+# Temporary files
 *.tmp
+*.temp
 *.swp
 *.swo
 
-# Environment
-.env
-.env.local
-.env.*
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
 
-# Editors
+# Build outputs
+dist/
+build/
+target/
+out/
+bin/
+
+# Dependencies
+node_modules/
+vendor/
+libs/
+
+# Python specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.venv.bak/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+*.cover
+.hypothesis/
+
+# Testing
+.nox/
+.pytest_cache/
+.tox/
+.coverage/
+
+# IDE specific
 .vscode/
 .idea/
 *.swp
 *.swo
-
-# Coverage
-coverage/
-htmlcov/
-.coverage
-
-# Python specific
-*.pyc
-__pycache__/
-*.pyo
-*.pyd
-.Python
-*.so
-.Python
-*.egg-info/
-.eggs/
-.pytest_cache/
-.mypy_cache/
-.tox/
-
-# System files
-.DS_Store
-Thumbs.db
+*~
 
 # Compressed files
 *.zip
+*.tar.gz
+*.tar.bz2
+*.tar.xz
 *.gz
-*.tar
-*.tgz
+*.rar
+*.7z
 *.bz2
 *.xz
-*.7z
-*.rar
 *.zst
 *.lz4
 *.lzh
@@ -75,8 +95,7 @@ Thumbs.db
 *.Z
 *.lz
 *.lzo
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.tar.zst
-```
+
+# Documentation builds
+docs/_build/
+sphinx_*/
